@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Usuwanie konta {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend>Usuwanie konta</legend>
+            <p>Jesteś pewien/pewna, że chcesz usunąć konto? Tej akcji nie można cofnąć. Nawet administracja nie będzie w stanie przywrócić Twojego konta.</p>
+            {{ form }}
+    </fieldset>
+    <div class="form-group">
+        <button type="submit">Usuń konto</button>
+            <a style="float:right;" 
+               href="{% url 'main:profileView' %}">Cancel</a>
+    </div>
+</form>
+
+
+{% endblock %} 
