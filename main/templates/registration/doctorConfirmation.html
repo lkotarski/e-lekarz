@@ -1,0 +1,8 @@
+{% autoescape off %}
+Witaj, {{ user.username }}!
+Aby dokończyć rejestrację na naszej stronie, prosimy o potwierdzenie adresu e-mail przy użyciu poniższego linku.
+
+http://{{ domain }}{% url 'main:activate_doctor' uidb64=uid token=token %}
+
+Po aktywowaniu konta zostaniesz automatycznie przeniesiony na stronę rejestracji konta lekarza.
+{% endautoescape %}
