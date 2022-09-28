@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@600;700&display=swap" rel="stylesheet"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <script src="{% static 'main/js/popup.js' %}"></script>
+    {% block css-links %} {% endblock %}
+    {% block js-links %} {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <center>
+        <li class="{{ message.tags }}">{{ message }}</li>
+      </center>
+      {% endfor %}
+    </ul>
+  {% endif %}
+    <main>
+        <div id="overlay"></div>
+        <div id="popup">
+            <button onclick="exit()" class="popup-close">&times;</button>
+            <div class="logo">
+                <span class="logo-main">E-Lekarz.pl</span>
+            </div>
+            <div class="popup-content">
+            </div>
+        </div>
+        <section class="top">
+        <div class="logo">
+            <span class="logo-main">E-Lekarz.pl</span>
+            <br>
+            <span class="logo-alt">Dbaj o zdrowie, to proste!</span>
+        </div>
+        <div class="nav-links">
+            <a class = "nav-links-a" href="{% url 'main:home' %}">Strona Główna</a>
+            <a class = "nav-links-b" href="{% url 'main:search' %}">Lista lekarzy</a>
+        </div>
+        
+        <!-- add some if statement here, depending on the user's login status display either this, or their picture and name -->
+        {% if not request.user.is_authenticated %}
+        <div class="nav-buttons">
+                <form action="{% url 'main:login' %}">
+                <button type="submit" class="login"><span class="button-content">ZALOGUJ</span></button>
+                </form>
+                <button onclick="signup()" class="signup"><span class="button-content">ZAREJESTRUJ</span></button>
+        </div>
+        {% else %}
+        <div class="nav-buttons">
+            <a href="{% url 'main:profileView' %}" style="color:black">{{ request.user.first_name }}</a>
+            <div class="img-user"></div>
+        </div>
+        {% endif %}
+        {% block top-content %} {% endblock %}
+        </section>
+
+        {% block content %} {% endblock %}
+
+        <div id="login-content">
+            <form>
+            <table>
+                <tr>
+                    <td>E-mail</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Haslo</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button>ZALOGUJ</button></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+        
+        <div id="register-content">
+            <span>
+            Zanim się zarejestrujesz,<br>
+            powiedz nam kim jesteś:<br>
+            </span>
+            <form action="{% url 'main:new' mode='user' %}">
+                <button style="margin-top: 40px" >PACJENTEM</button>
+            </form>
+            <br>
+            <form action="{% url 'main:new' mode='doctor' %}">
+                <button style="margin-top: 20px">LEKARZEM</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
