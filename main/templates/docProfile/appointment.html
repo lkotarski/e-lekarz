@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Wizyta u {{doc.user.first_name}} {{doc.user.last_name}} {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h1> Umawianie wizyty do: {{doc.user.first_name}} {{doc.user.last_name}} </h1>
+
+<div class="forms-div">
+    <form action="{% url 'main:appointment' id=doc.user.id %}" method="post">
+        <table>
+        {{ form.as_table }}
+        </table>
+           {% csrf_token %}
+           <input type="submit" value="UMÓW WIZYTĘ">
+    </form>
+</div>
+
+{% endblock %}
