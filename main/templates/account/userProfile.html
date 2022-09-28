@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profil użytkownika {{user.first_name}} {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/userProfile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h3>Witaj, {{user.first_name}}!</h3>
+
+<div class="edit-buttons">
+<form action="{% url 'main:editProfile' %}">
+  <button type="submit">EDYTUJ PROFIL</button>
+</form>
+
+
+{% if user.isDoctor %}
+
+<form action="{% url 'main:editDocProfile' %}"> 
+  <button type="submit">EDYTUJ PROF. DOK.</button>
+</form>
+
+{% endif %}
+<form action="{% url 'main:password_reset' %}"> 
+  <button type="submit">ZMIEŃ HASŁO</button>
+</form>
+<form action="{% url 'main:delete' %}"> 
+  <button type="submit">USUŃ KONTO</button>
+</form>
+<form action="{% url 'main:logout' %}"> 
+  <button type="submit">WYLOGUJ SIĘ</button>
+</form>
+</div>
+
+<div class="visits-wrapper">
+<div class="visits-div" style="margin-right: 30px;"> 
+  <h3>Historia wizyt</h3>
+  <hr>
+  {% for visit in today_old %}
+
+  <div class="visit"> Wizyta u <a href="{% url 'main:docProfile' id=visit.doctor.id %}"> {{visit.doctor.first_name}} {{visit.doctor.last_name}}</a> w dniu {{visit.date}} o {{visit.hour}} </div>
+  <hr>
+  {% endfor %}
+  {% for visit in visits_old %}
+
+  <div class="visit"> Wizyta u <a href="{% url 'main:docProfile' id=visit.doctor.id %}"> {{visit.doctor.first_name}} {{visit.doctor.last_name}} </a> w dniu {{visit.date}} o {{visit.hour}} </div>
+  <hr>
+  {% endfor %}
+</div>
+
+<div class="visits-div"> 
+  <h3 style="white-space: nowrap">Wizyty nadchodzące</h3>
+  <hr>
+  {% for visit in today_next %}
+
+  <div class="visit"> Wizyta u <a href="{% url 'main:docProfile' id=visit.doctor.id %}"> {{visit.doctor.first_name}} {{visit.doctor.last_name}} </a> w dniu {{visit.date}} o {{visit.hour}} </div>
+  <hr>
+  {% endfor %}
+  {% for visit in visits_next %}
+
+  <div class="visit"> Wizyta u <a href="{% url 'main:docProfile' id=visit.doctor.id %}"> {{visit.doctor.first_name}} {{visit.doctor.last_name}} </a> w dniu {{visit.date}} o {{visit.hour}} </div>
+  <hr>
+  {% endfor %}
+</div>
+
+</div>
+
+{% if user.isDoctor %}
+
+<div class="visits-div" style="margin-right: 30px; margin-top:30px;"> 
+  <h3>Pacjenci:</h3>
+  <hr>
+
+  {% for patient in patients_today %}
+ 
+  <div class="visit">
+    {{patient.date}} o godzinie {{patient.hour}} >> {{patient.first_name}} {{patient.last_name}} <br>
+    <b> Powód: </b> <br/>
+    <i>{{patient.cause}}</i> <br/>
+    <b> Numer kontaktowy: </b> {{patient.phone_number}}
+    <hr>
+    {%endfor%}
+
+    {% for patient in patients_future %}
+ 
+  <div class="visit">
+    {{patient.date}} o godzinie {{patient.hour}} >> {{patient.first_name}} {{patient.last_name}} <br>
+    <b> Powód: </b><br/>
+    <i>{{patient.cause}} </i><br/>
+    <b> Numer kontaktowy: </b> {{patient.phone_number}}
+    <hr>
+    {%endfor%}
+    
+  
+  </div> 
+</div>
+
+{% endif %}
+
+{% endblock %}
