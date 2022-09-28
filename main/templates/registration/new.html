@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Rejestracja {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+ 
+<div class="forms-div">
+<form action="{% url 'main:new' mode=mode1 %}" method="post">
+    <table>
+    {{ user_form.as_table }}
+    </table>
+       {% csrf_token %}
+
+       <input type="submit" value="Zarejestruj się!">
+
+
+</form>
+</div>
+{% endblock %} 
