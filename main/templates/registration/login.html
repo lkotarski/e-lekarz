@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Logowanie {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="forms-div">
+<form  action="{% url 'main:login' %}" method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+    <p> Nazwa użytkownika i hasło nie są poprawne. Spróbuj ponownie.</p>
+    {% endif %}
+
+    <table>
+    {{ form.as_table }}
+    </table>
+
+    <input type="submit" value="Zaloguj" />
+</form>
+</div>
+
+
+{% endblock %} 
