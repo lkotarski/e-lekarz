@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profil doktora XYZ {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/docProfile.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="doc-container">
+    <div class="doc-main"> 
+        <div class="doc-img"></div>
+        <div class="doc-info">
+            <h2> dr. {{doc.user.first_name}} {% if doc.user.second_name %} {{doc.user.second_name}} {% endif %} {{doc.user.last_name}}</h2>
+            <h3> {{doc.get_spec1_display}}{%if doc.spec2%}, {{doc.get_spec2_display}} {%endif%} </h3>
+            <h4> {{doc.description}} </h3>
+            <h4>Przyjmuję w {{doc.facility}}, <i> {{doc.city}}, {{doc.address}} </i> </h4>
+        </div>
+        <div class="doc-links">
+            <form action="{% url 'main:appointment' doc.user.id%}"> 
+                <button type="submit">UMÓW WIZYTĘ</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    {% if not user.is_anonymous %}
+
+<div class = "forms-div">
+    <form action="." method="post">
+        <table>
+        {{ comment_form.as_table }}
+        </table>
+           {% csrf_token %}
+           <input type="submit" value="DODAJ KOMENTARZ">
+    </form>
+</div>
+
+{% endif %}
+
+<h3>Opinie:</h3>
+
+{% for comment in comments %}
+
+<div class="comment">
+<h3> {{comment.author.first_name}}</h2>
+
+<p> {{comment.content}} </p>
+</div>
+
+{% endfor %}
+
+{% endblock %}
