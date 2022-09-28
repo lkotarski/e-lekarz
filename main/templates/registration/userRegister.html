@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Rejestracja {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+ 
+<div class="forms-div">
+<form action="." method="post">
+    <table>
+    {{ user_form.as_table }}
+    </table>
+       {% csrf_token %}
+
+       <input type="submit" value=
+       {% if mode != 'doctor' %}
+       "ZAREJESTRUJ SIĘ" 
+       {% else %} 
+       "KONTYNUUJ"
+       {% endif %}>
+
+
+</form>
+</div>
+
+<h1>Mode is: {{mode}} </h1>
+
+{% endblock %} 
