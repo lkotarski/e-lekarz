@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+{% block js-links %}
+    
+{% endblock %}
+
+{% block title %} Niepoprawny link {% endblock %}
+
+{% block top-content %}
+
+{% endblock %}
+
+{% block content %}
+
+<h1> 
+    Nieudana aktywacja konta
+</h1>
+
+<h2>
+    Podany przez Ciebie link aktywacyjny jest niepoprawny. Być może został źle przekopiowany bądź minął termin jego ważności. Skontaktuj się z administratorem w celu ponownego wygenerowania kodu.
+</h2>
+
+{% endblock %}
