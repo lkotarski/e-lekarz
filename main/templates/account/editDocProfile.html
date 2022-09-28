@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profil użytkownika {{user.first_name}} {% endblock %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h3>Edycja profilu: {{user.first_name}} {{user.last_name}}</h3>
+
+<div class="forms-div">
+  <form action="." method="post">
+    <table>
+      {{ form.as_table }}
+    </table>
+      {{form.errors}}
+         {% csrf_token %}
+         <input type="submit" value="ZAPISZ">
+  </form>
+</div>
+
+
+{% endblock %}
