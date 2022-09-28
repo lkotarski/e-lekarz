@@ -1,0 +1,35 @@
+.forms-div form table input {
+    background-color: #DFDCE3;
+    border-radius: 5px;
+    border: 1px #a8a8a8 solid;
+    width: 220px;
+    height: 25px;
+
+}
+
+.forms-div form table {
+    white-space: nowrap;
+}
+
+.forms-div form table td {
+    padding-left: 30px;
+}
+
+.forms-div form table th,td {
+    padding-top: 10px;
+}
+
+.forms-div form input[type=submit] {
+    margin-top: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Signika Negative', sans-serif;
+    font-weight: 700;
+    height: 35px;
+    color:white;
+    background-color: #4abdac;
+    border: none;
+    border-radius: 7px;
+    padding: 0 10px;
+}
