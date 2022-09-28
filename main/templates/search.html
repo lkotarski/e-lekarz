@@ -1,0 +1,43 @@
+  {% extends 'base.html' %}
+{% load static %}
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/search.css' %}">
+{% endblock %}
+
+{% block title %} Lista lekarzy {% endblock %}
+
+
+{% block top-content %}
+
+{% endblock %}
+
+{%block content%}
+
+<h2> </h2>
+<div class="doc-container">
+{% for doc in docList.qs %}
+<div class="doc-main"> 
+	<div class="doc-img"></div>
+	<div class="doc-info">
+		<h2> {{doc.user.first_name}} {{doc.user.last_name}}</h2>
+		<h3> {{doc.get_spec1_display}}{%if doc.spec2%}, {{doc.get_spec2_display}} {%endif%} </h3>
+		<h4> {{doc.city}} </h4>
+		<h4 style="text-overflow: ellipsis; overflow-inline: clip;"> {{doc.description}} </h3>
+	</div>
+	<div class="doc-links">
+		<form action="{% url 'main:appointment' doc.user.id%}"> 
+			<button type="submit">UMÓW WIZYTĘ</button>
+		</form>
+		<form action="{{ doc.get_absolute_url }}">
+			<button type="submit">WIĘCEJ</button>
+		</form>
+	</div>
+</div>
+{% empty %}
+<h1> Nie znaleziono wyników </h1>
+<p> Niestety, ale nie znaleziono lekarzy, którzy spełniają podane kryteria wyszukiwania. </p>
+{% endfor %}
+
+</div>
+
+{% endblock %}
