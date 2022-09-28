@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css-links %}
+    <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+{% block js-links %}
+    
+{% endblock %}
+
+{% block title %} Strona główna {% endblock %}
+
+{% block top-content %}
+
+{% endblock %}
+
+{% block content %}
+
+<section class="banner"></section>
+
+<form method="GET" action="{% url 'main:search' %}">
+    <center>
+    <h2> Wyszukaj po specjalizacji: </h2>
+    {{docList.form.spec}}
+    <h2> Wyszukaj po mieście: </h2>
+    {{docList.form.city}} <br/> <br/>
+    <button type="submit"> Wyszukaj! </button>
+    </center>
+</form>
+
+{% endblock %}
