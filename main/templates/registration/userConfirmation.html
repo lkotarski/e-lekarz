@@ -1,0 +1,8 @@
+{% autoescape off %}
+Witaj, {{ user.username }}!
+Aby dokończyć rejestrację na naszej stronie, prosimy o potwierdzenie adresu e-mail przy użyciu poniższego linku.
+
+http://{{ domain }}{% url 'main:activate_user' uidb64=uid token=token %}
+
+Dziękujemy za obdarzenie nas zaufaniem!
+{% endautoescape %}
