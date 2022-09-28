@@ -1,0 +1,55 @@
+.doc-container {
+	display: block;
+}
+
+.doc-main {
+	padding: 20px;
+	width: 100%;
+	min-width: 800px;
+	height: 200px;
+	background-color: #C2FFE1;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	white-space: nowrap;
+	
+}
+
+.doc-main, .doc-img {
+	border-radius: 10px;
+}
+
+.doc-info, .doc-links {
+	margin-left: 15px;
+}
+
+.doc-img {
+	min-width:150px;
+	min-height: 150px;
+	background-image: url('../img/doc-square.jpg');
+	background-size: contain;
+}
+
+.doc-info {
+	width:100%;
+	height: 150px;
+	overflow: hidden;
+}
+
+.doc-links {
+	display: flex;
+	flex-direction:column;
+	gap: 10px;
+	justify-content: center;
+	height:100%;
+}
+
+.doc-links form button{
+	white-space: nowrap;
+	justify-content: center;
+	width: 100%;
+}
+
+.doc-main h1, .doc-main h2, .doc-main h3, .doc-main h4{
+	margin: 2px;
+}
